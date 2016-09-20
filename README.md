@@ -1,14 +1,12 @@
 ## Description
 
-Make a small Scrabble type game for a single-page web app.
+Make a single-page web and mobile responsive word game that allows users to log in via social media, choose a difficulty level from easy (4 letters) to hard (any dictionary word), and choose a language.
 
-This game would be made of three words. You may style these in any way that you would like on the page.
+Per game session, the user will attempt three words one by one. During the game, they will be able to click a button to re-scramble the current word, which will be animated via CSS. The user will have unlimited tries to unscramble each word.
 
-The program needs to scramble the three words, then the end user would have to unscramble the three words.
+Once the user unscrambles all three words, they will be notified that they have won with a dismissable modal.
 
-If they are not successful, then they have to try again. They should have unlimited tries.
-
-Hint: think about arrays, if else statements. Code would be HTML/CSS/Javascript_
+The only libraries used to construct this will be for i18n.
 
 ## Context
 
@@ -18,23 +16,21 @@ Make sure to look at templates if you need to, but you should create the code fr
 
 ## Specifications
 
-- [ ] Code can be viewed as a web page.
-- [ ] There are three words in the program that randomly scramble on page refresh.
+- [ ] User can play the game in a browser, regardless of platform/resolution.
+- [ ] User can pick a language when starting the game.
+- [ ] User can pick a difficulty level from easy (4 letters only) to hard (any 4+ length word).
+- [ ] User must unscramble three words, one at a time, to win.
+- [ ] User can click a button to "throw away" a word and get a new one unlimited times.
+- [ ] User can re-scramble the words unlimited times.
+- [ ] Re-scramble will be animated with CSS.
 - [ ] User is prompted for an answer.
-- [ ] User is alerted of game results.
-- [ ] Basic CSS styling is used.
+- [ ] User can attempt a word unlimited times.
+- [ ] User is notified of whether their current guess is correct.
+- [ ] User receives a dismissable modal notifying when they win the game.
+- [ ] User is delighted by pleasant CSS interface.
 
 ### Required
 
 _Do not remove these specs - they are required for all goals_.
 
-- [ ] The artifact produced is properly licensed, preferably with the [MIT license][mit-license].
-
----
-
-<!-- LICENSE -->
-
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
-<br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-
-[mit-license]: https://opensource.org/licenses/MIT
+- [x] The artifact produced is properly licensed, preferably with the [MIT license][mit-license].
