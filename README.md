@@ -1,10 +1,10 @@
 ## Description
 
-Make a single-page web and mobile responsive word game that allows users to log in via social media, choose a difficulty level from easy (4 letters) to hard (any dictionary word), and choose a language.
+Make a single-page web and mobile responsive word game that allows users to choose a language and a difficulty level from easy (4 letters) to hard (any dictionary word).
 
-Per game session, the user will attempt three words one by one. During the game, they will be able to click a button to re-scramble the current word, which will be animated via CSS. The user will have unlimited tries to unscramble each word.
+Per game session, the user will attempt three words one by one. During the game, they will be able to click a button to re-scramble the current word, which will be animated via CSS. The user will have unlimited tries to unscramble each word, but can dismiss a word and get a new one unlimited times.
 
-Once the user unscrambles all three words, they will be notified that they have won with a dismissable modal.
+The user will be notified if their guess is correct or incorrect. Once the user unscrambles all three words, they will be notified that they have won with a dismissable modal.
 
 The only libraries used to construct this will be for i18n.
 
