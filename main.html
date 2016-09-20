@@ -1,11 +1,48 @@
 <html>
 
-<head>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Scram!</title>
+  </head>
 
-<body>
-<script type="text/javascript" src="game.js"></script>
-</body>
+  <body>
+    <header>
+      <h1>Scram!</h1><br><div id="description"><h2>Unscramble three words to win &hearts;</h2></div>
+    </header>
+
+    <div id="game">
+      <p id="word">
+        <span class="letter" id="letter1">W</span>
+        <span class="letter" id="letter2">O</span>
+        <span class="letter" id="letter3">R</span>
+        <span class="letter" id="letter4">D</span>
+      </p>
+
+      <p id="active-game-buttons">
+        <button id="scramble">Scramble</button>
+        <button id="new-word">New Word</button>
+      </p>
+
+      <p id="new-game-buttons">
+        <button id="new-game">New Game</button><br>
+        <span id="difficulty-selector">
+          <input type="radio" name="difficulty" value="easy"> Easy (4 letters)
+          <input type="radio" name="difficulty" value="medium"> Medium (4-7 letters) 
+          <input type="radio" name="difficulty" value="hard"> Hard (4-10 letters)
+        </span>
+        <span id="divider"> | </span>
+        <span id="language-selector">
+          <input type="radio" name="language" value="en"> EN 
+          <input type="radio" name="language" value="fr"> FR 
+          <input type="radio" name="language" value="sp"> SP
+        </span>
+      </p>
+
+    </div>
+
+    <footer>
+      <script type="text/javascript" src="game.js"></script>
+    </footer>
+  </body>
 
 </html>
