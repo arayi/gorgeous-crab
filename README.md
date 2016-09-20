@@ -34,3 +34,7 @@ Make sure to look at templates if you need to, but you should create the code fr
 _Do not remove these specs - they are required for all goals_.
 
 - [x] The artifact produced is properly licensed, preferably with the [MIT license][mit-license].
+
+### Asset information
+
+Image assets acquired from iconarchive.com and psdgraphics.com.
