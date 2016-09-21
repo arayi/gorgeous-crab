@@ -15,7 +15,7 @@ function runGame () {
     console.log(getScore());
   };
 
-  // winGame();
+  winGame();
 };
 
 function saveSettings (name, settings) {
@@ -89,7 +89,15 @@ function isCorrect (answer, word) {
 };
 
 function winGame () {
-
+  var modal = document.getElementById('win-modal');
+  modal.show();
+  document.getElementById('dismiss').onclick = function() {
+    modal.close();
+  };
+  document.getElementById('play-again').onclick = function() {
+    modal.close();
+    runGame();
+  }
 };
 
 runGame();
