@@ -81,16 +81,43 @@ function generateWord (settings) {
 };
 
 function shuffleLetters () {
-  var word = getLetters();
-  console.log(word);
+  var word = getLettersFromDOM();
+  word = changeLetterOrder(word);
 };
 
-function getLetters () {
+function getLettersFromDOM () {
   var letters = Array.from(document.getElementsByClassName('letter'));
-  console.log(letters);
+  
   for (var i = 0; i < letters.length; i++) {
-    console.log(letters[i].innerHTML);
+    letters[i] = letters[i].innerHTML;
   }
+
+  return letters;
+}
+
+function changeLetterOrder(letterArray) {
+  var currentOrder = letterArray;
+  var wordLength = currentOrder.length;
+  var newOrder = new Array(wordLength);
+  var randomIndex = randomIndexFromLength(wordLength);
+
+  while (currentOrder.length > 0) {
+    if (typeof(newOrder[randomIndex]) !== 'string') {
+      newOrder[randomIndex] = currentOrder.pop();
+    } else {
+      randomIndex = randomIndexFromLength(wordLength);
+    }
+  }
+
+  console.log(newOrder);
+}
+
+function randomIndexFromLength (length) {
+  return Math.floor(Math.random() * length);
+}
+
+function writeLettersToDOM () {
+
 }
 
 function isCorrect (answer, word) {
