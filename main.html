@@ -18,25 +18,32 @@
         <span class="letter" id="letter4">D</span>
       </p>
 
-      <p id="active-game-buttons">
-        <button id="scramble">Scramble</button>
-        <button id="new-word">New Word</button>
-      </p>
+      <form>
+        <p id="active-game-buttons">
+          <button id="scramble" onclick="shuffleLetters()">Scramble</button>
+          <button id="new-word">New Word</button>
+        </p>
 
-      <p id="new-game-buttons">
-        <button id="new-game">New Game</button><br>
-        <span id="difficulty-selector">
-          <input type="radio" name="difficulty" value="easy"> Easy (4 letters)
-          <input type="radio" name="difficulty" value="medium"> Medium (4-7 letters) 
-          <input type="radio" name="difficulty" value="hard"> Hard (4-10 letters)
-        </span>
-        <span id="divider"> | </span>
-        <span id="language-selector">
-          <input type="radio" name="language" value="en"> EN 
-          <input type="radio" name="language" value="fr"> FR 
-          <input type="radio" name="language" value="sp"> SP
-        </span>
-      </p>
+        <p>
+          <input type="text" autocapitalize="none" autocomplete="off" autocorrect="off">
+          <button id="submit-guess">Guess</button>
+        </p>
+
+        <p id="new-game-buttons">
+          <button id="new-game" onclick="runGame();">New Game</button><br>
+          <span id="difficulty-selector">
+            <input type="radio" name="difficulty" value="easy" checked> Easy (4 letters)
+            <input type="radio" name="difficulty" value="medium"> Medium (4-7 letters) 
+            <input type="radio" name="difficulty" value="hard"> Hard (4-10 letters)
+          </span>
+          <span id="divider"> | </span>
+          <span id="language-selector">
+            <input type="radio" name="language" value="en" checked> EN 
+            <input type="radio" name="language" value="fr"> FR 
+            <input type="radio" name="language" value="sp"> SP
+          </span>
+        </p>
+      </form>
 
     </div>
 
