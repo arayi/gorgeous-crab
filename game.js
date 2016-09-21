@@ -80,9 +80,18 @@ function generateWord (settings) {
   }
 };
 
-function shuffleLetters (currentWord) {
-
+function shuffleLetters () {
+  var word = getLetters();
+  console.log(word);
 };
+
+function getLetters () {
+  var letters = Array.from(document.getElementsByClassName('letter'));
+  console.log(letters);
+  for (var i = 0; i < letters.length; i++) {
+    console.log(letters[i].innerHTML);
+  }
+}
 
 function isCorrect (answer, word) {
  return answer.toLowercase() === word.toLowercase();
@@ -99,5 +108,3 @@ function winGame () {
     runGame();
   }
 };
-
-runGame();
