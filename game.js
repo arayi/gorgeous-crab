@@ -1,6 +1,6 @@
 
 console.log('start');
-console.log(en[0]);
+// console.log(en[0]);
 
 function runGame () {
   var settings = [pickLanguage(), pickDifficulty()];
