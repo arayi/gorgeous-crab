@@ -2,11 +2,16 @@
 
 
 console.log('start');
-// console.log(en[0]);
 
 function runGame () {
   var settings = [pickLanguage(), pickDifficulty()];
   var score = 0;
+
+  saveSettings('localSettings', settings)
+  saveSettings('currentGameScore', score)
+
+
+
 
   // while (score < 3) {
 
@@ -15,18 +20,37 @@ function runGame () {
   // winGame();
 };
 
+function saveSettings(name, settings) {
+  var name = name.toString();
+  console.log(name);
+
+  var settings = settings.toString();
+  if (typeof(name) === 'string' && typeof(settings) === 'string') {
+    localStorage.setItem(name, settings);
+  } else {
+    console.log('error saving state of: ' + name + ': ' + settings);
+  }
+}
+
+function getSettings(name) {
+  return localStorage.getItem(name)
+}
+
 function pickLanguage() {
   var languages = document.getElementsByName('language');
   for (var i = 0; i < languages.length; i++) {
     if (languages[i].checked) {
       if (languages[i].value === 'en') {
-        console.log('english')
+        return 'english'
       }else if (languages[i].value === 'fr') {
         console.log('french')
       }else
         console.log('spanish')
     };
   };
+
+
+
 };
 
 function pickDifficulty() {
@@ -36,6 +60,8 @@ function pickDifficulty() {
       return difficulties[i].value;
     };
   };
+
+
 };
 
 function generateWord (settings) {
@@ -58,5 +84,7 @@ function isCorrect (answer, word) {
 function winGame () {
 
 };
+
+runGame();
 
 console.log('end');
