@@ -12,8 +12,8 @@
 
     <dialog id="win-modal">
       <h3>You win!</h3>
-      <button id="play-again">Play Again</button>
-      <button id="dismiss">Dismiss</button>
+      <button type="button" id="play-again">Play Again</button>
+      <button type="button" id="dismiss">Dismiss</button>
     </dialog>
 
     <div id="game">
@@ -26,17 +26,17 @@
 
       <form>
         <p id="active-game-buttons">
-          <button id="scramble" onclick="shuffleLetters();">Scramble</button>
-          <button id="new-word">New Word</button>
+          <button type="button" id="scramble" onclick="shuffleLetters();">Scramble</button>
+          <button type="button" id="new-word">New Word</button>
         </p>
 
         <p>
           <input type="text" autocapitalize="none" autocomplete="off" autocorrect="off">
-          <button id="submit-guess">Guess</button>
+          <button type="button" id="submit-guess">Guess</button>
         </p>
 
         <p id="new-game-buttons">
-          <button id="new-game" onclick="runGame();">New Game</button><br>
+          <button type="button" id="new-game" onclick="runGame();">New Game</button><br>
           <span id="difficulty-selector">
             <input type="radio" name="difficulty" value="easy" checked> Easy (4 letters)
             <input type="radio" name="difficulty" value="medium"> Medium (4-7 letters)
