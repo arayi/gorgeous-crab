@@ -5,7 +5,7 @@ function runGame () {
   var settings = [pickLanguage(), pickDifficulty()];
   var score = 0;
 
-  // localStorage.clear();
+  localStorage.clear();
 
   saveSettings('localSettings', settings)
   saveSettings('currentGameScore', score)
@@ -81,8 +81,16 @@ function generateWord (settings) {
 };
 
 function shuffleLetters () {
-  var word = getLettersFromDOM();
-  word = changeLetterOrder(word);
+  var oldLetterOrder = getLettersFromDOM();
+  var consumableOrder = getLettersFromDOM();
+  var newLetterOrder = changeLetterOrder(consumableOrder);
+
+  while (newLetterOrder == oldLetterOrder) {
+    consumableOrder = getLettersFromDOM();
+    newLetterOrder = changeLetterOrder(consumableOrder);
+  }
+
+  writeLettersToDOM(newLetterOrder);
 };
 
 function getLettersFromDOM () {
@@ -108,15 +116,23 @@ function changeLetterOrder(letterArray) {
       randomIndex = randomIndexFromLength(wordLength);
     }
   }
-
-  console.log(newOrder);
+  return newOrder;
 }
 
 function randomIndexFromLength (length) {
   return Math.floor(Math.random() * length);
 }
 
-function writeLettersToDOM () {
+function writeLettersToDOM (newOrder) {
+  var domNode = document.getElementById('word');
+
+  while (domNode.firstChild) {
+    domNode.removeChild(domNode.firstChild);
+  };
+
+  for (i = 0; i < newOrder.length; i++) {
+    domNode.innerHTML += '<span class=\"letter\" id=\"' + i + '\">' + newOrder[i] + '</span>\n        '
+  }
 
 }
 
@@ -135,3 +151,5 @@ function winGame () {
     runGame();
   }
 };
+
+runGame();
