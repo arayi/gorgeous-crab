@@ -1,4 +1,6 @@
 
+
+
 console.log('start');
 // console.log(en[0]);
 
@@ -19,7 +21,10 @@ function pickLanguage() {
     if (languages[i].checked) {
       if (languages[i].value === 'en') {
         console.log('english')
-      }
+      }else if (languages[i].value === 'fr') {
+        console.log('french')
+      }else
+        console.log('spanish')
     };
   };
 };
