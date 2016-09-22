@@ -1,7 +1,7 @@
 
 // 1. Main game loop and helper functions
 // 2. Interaction with locally stored settings
-// 3. Functions to retrieve settings from DOM
+// 3. Functions to interact with the DOM
 // 4. Functions to generate and interact with words
 // 5. Functions for animation
 // 6. Dictionaries
@@ -15,6 +15,7 @@ function runGame () {
 
   var currentWord = generateWord(settings).toUpperCase().split('');
   writeLettersToDOM(currentWord);
+  shuffleLetters();
 
   console.log("currentWord is: " + currentWord);
 
@@ -90,7 +91,7 @@ function incrementScore () {
 }
 
 
-// 3. Functions to retrieve settings from DOM
+// 3. Functions to interact with the DOM
 
 function pickLanguage() {
   var languages = document.getElementsByName('language');
