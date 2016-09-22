@@ -3,7 +3,7 @@
 // 2. Interaction with locally stored settings
 // 3. Functions to retrieve settings from DOM
 // 4. Functions to generate and interact with words
-
+// 5. Functions for animation
 
 
 // 1. Main game loop and helper functions
