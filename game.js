@@ -134,7 +134,8 @@ function writeLettersToDOM (newOrder) {
 
 function getGuess () {
   var currentGuess = document.getElementById('guess').value.toUpperCase().split('');
-  console.log(compareGuess(currentGuess, ['w', 'o', 'r', 'd']));
+  console.log(currentGuess);
+  console.log(compareGuess(currentGuess, ['W', 'O', 'R', 'D']));
 }
 
 function setAlert (text) {
@@ -162,12 +163,15 @@ function shuffleLetters () {
   var consumableOrder = getLettersFromDOM();
   var newLetterOrder = changeLetterOrder(consumableOrder);
 
+  fadeLettersOut();
+
   while (newLetterOrder == oldLetterOrder) {
     consumableOrder = getLettersFromDOM();
     newLetterOrder = changeLetterOrder(consumableOrder);
   }
 
   writeLettersToDOM(newLetterOrder);
+  fadeLettersIn();
 };
 
 function changeLetterOrder(letterArray) {
@@ -229,6 +233,26 @@ function pulseAlert () {
     document.getElementById('correctness').classList.remove("pulse-once");
     document.getElementById('correctness').classList.add("hidden");
   }, 1500);
+}
+
+function fadeLettersOut () {
+  var letters = document.getElementsByClassName('letter');
+  console.log(letters);
+  for (var i = 0; i < letters.length; i++) {
+    letters[i].classList.remove("word-fade-in");
+    letters[i].classList.add("word-fade-out");
+    console.log(letters[i].className);
+  }
+}
+
+function fadeLettersIn () {
+  for (var i = 0; i < getLettersFromDOM.length; i++) {
+    setTimeout(function () {
+      document.getElementById(i).classList.remove("word-fade-out");
+      document.getElementById(i).classList.add("word-fade-in");
+      console.log(document.getElementById(i).className);
+    }, 250);
+  }
 }
 
 runGame();
