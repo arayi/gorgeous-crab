@@ -1,9 +1,12 @@
 body {
-  background-color: 99ccff;
+  color: #400;
+  background-color: #7cf;
   text-align: center;
+  font-family: 'Alfa Slab One', cursive;
 }
 
 h1 {
+  font-size: 500%;
   padding-bottom: 0px;
   margin-bottom: 0px;
 }
@@ -11,12 +14,41 @@ h1 {
 #divider {
   font-size: 2em;
   position: relative;
-
+  top: 5px;
+  color: #912;
 }
 
 h2 {
   padding-top: 0px;
   margin-top: 0px;
+}
+
+.letter {
+  color: #300;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 5em;
+  border: 5px solid #601;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 5px;
+  background-image: url('./wooden-pattern.jpg');
+  background-position: relative;
+  text-shadow: -1px -1px 2px #600, 1px 1px 2px #400;
+}
+
+button {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 120%;
+  border-radius: 5px;
+  background-color: #eee;
+}
+
+#shuffle {
+  position: relative;
+  top: 5px;
+  margin-right: 10px;
+  border-radius: 15px;
+
 }
 
 .hidden {
