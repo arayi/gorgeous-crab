@@ -1,5 +1,12 @@
 
+// 1. Main game loop and helper functions
+// 2. Interaction with locally stored settings
+// 3. Functions to retrieve settings from DOM
+// 4. Functions to generate and interact with words
 
+
+
+// 1. Main game loop and helper functions
 
 function runGame () {
   var settings = [pickLanguage(), pickDifficulty()];
@@ -18,6 +25,30 @@ function runGame () {
   }, 1000);
 
 };
+
+function checkForWin () {
+  if (getScore() === 3) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+function winGame () {
+  var modal = document.getElementById('win-modal');
+  modal.show();
+  document.getElementById('dismiss').onclick = function() {
+    modal.close();
+  };
+  document.getElementById('play-again').onclick = function() {
+    modal.close();
+    runGame();
+  }
+};
+
+
+// 2. Interaction with locally stored settings
 
 function saveSettings (name, settings) {
   var name = name.toString();
@@ -50,6 +81,9 @@ function incrementScore () {
   saveSettings('currentGameScore', newScore);
 }
 
+
+// 3. Functions to retrieve settings from DOM
+
 function pickLanguage() {
   var languages = document.getElementsByName('language');
   for (var i = 0; i < languages.length; i++) {
@@ -63,8 +97,6 @@ function pickLanguage() {
     };
   };
 
-
-
 };
 
 function pickDifficulty() {
@@ -76,6 +108,45 @@ function pickDifficulty() {
     };
   };
 };
+
+function getLettersFromDOM () {
+  var letters = Array.from(document.getElementsByClassName('letter'));
+  
+  for (var i = 0; i < letters.length; i++) {
+    letters[i] = letters[i].innerHTML.toUpperCase();
+  }
+
+  return letters;
+}
+
+function writeLettersToDOM (newOrder) {
+  var domNode = document.getElementById('word');
+
+  while (domNode.firstChild) {
+    domNode.removeChild(domNode.firstChild);
+  };
+
+  for (i = 0; i < newOrder.length; i++) {
+    domNode.innerHTML += '<span class=\"letter\" id=\"' + i + '\">' + newOrder[i] + '</span>\n        '
+  }
+
+}
+
+function getGuess () {
+  var currentGuess = document.getElementById('guess').value.toUpperCase().split('');
+  console.log(compareGuess(currentGuess, ['w', 'o', 'r', 'd']));
+}
+
+function setAlert (text) {
+  if (typeof(text) === 'string') {
+    document.getElementById('correctness').innerHTML = text;
+  } else {
+    console.log('error setting alert');
+  }
+}
+
+
+// 4. Functions to generate and interact with words
 
 function generateWord (settings) {
   var language = settings[0];
@@ -99,16 +170,6 @@ function shuffleLetters () {
   writeLettersToDOM(newLetterOrder);
 };
 
-function getLettersFromDOM () {
-  var letters = Array.from(document.getElementsByClassName('letter'));
-  
-  for (var i = 0; i < letters.length; i++) {
-    letters[i] = letters[i].innerHTML.toUpperCase();
-  }
-
-  return letters;
-}
-
 function changeLetterOrder(letterArray) {
   var currentOrder = letterArray;
   var wordLength = currentOrder.length;
@@ -127,19 +188,6 @@ function changeLetterOrder(letterArray) {
 
 function randomIndexFromLength (length) {
   return Math.floor(Math.random() * length);
-}
-
-function writeLettersToDOM (newOrder) {
-  var domNode = document.getElementById('word');
-
-  while (domNode.firstChild) {
-    domNode.removeChild(domNode.firstChild);
-  };
-
-  for (i = 0; i < newOrder.length; i++) {
-    domNode.innerHTML += '<span class=\"letter\" id=\"' + i + '\">' + newOrder[i] + '</span>\n        '
-  }
-
 }
 
 function compareGuess (guess, answer) {
@@ -170,13 +218,8 @@ function compareGuess (guess, answer) {
   return currentGuess == currentAnswer;
 }
 
-function setAlert (text) {
-  if (typeof(text) === 'string') {
-    document.getElementById('correctness').innerHTML = text;
-  } else {
-    console.log('error setting alert');
-  }
-}
+
+// 5. Functions for animation
 
 function pulseAlert () {
   document.getElementById('correctness').classList.remove("hidden");
@@ -187,39 +230,5 @@ function pulseAlert () {
     document.getElementById('correctness').classList.add("hidden");
   }, 1500);
 }
-
-function disableGuessing () {
-
-}
-
-function enableGuessing () {
-
-}
-
-function getGuess () {
-  var currentGuess = document.getElementById('guess').value.toUpperCase().split('');
-  console.log(compareGuess(currentGuess, ['w', 'o', 'r', 'd']));
-}
-
-function checkForWin () {
-  if (getScore() === 3) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-
-function winGame () {
-  var modal = document.getElementById('win-modal');
-  modal.show();
-  document.getElementById('dismiss').onclick = function() {
-    modal.close();
-  };
-  document.getElementById('play-again').onclick = function() {
-    modal.close();
-    runGame();
-  }
-};
 
 runGame();
