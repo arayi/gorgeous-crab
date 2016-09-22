@@ -4,6 +4,7 @@
 // 3. Functions to retrieve settings from DOM
 // 4. Functions to generate and interact with words
 // 5. Functions for animation
+// 6. Dictionaries
 
 
 // 1. Main game loop and helper functions
@@ -12,10 +13,17 @@ function runGame () {
   var settings = [pickLanguage(), pickDifficulty()];
   var score = 0;
 
+  var currentWord = generateWord(settings).toUpperCase().split('');
+  writeLettersToDOM(currentWord);
+
+  console.log("currentWord is: " + currentWord);
+
   localStorage.clear();
 
   saveSettings('localSettings', settings)
   saveSettings('currentGameScore', score)
+
+  console.log(settings + "are the settings for this game");
 
   var mainGameInterval = setInterval(function() {
     if (checkForWin() === true) {
@@ -88,12 +96,15 @@ function pickLanguage() {
   var languages = document.getElementsByName('language');
   for (var i = 0; i < languages.length; i++) {
     if (languages[i].checked) {
-      if (languages[i].value === 'en') {
-        return 'english'
-      }else if (languages[i].value === 'fr') {
-        console.log('french')
-      }else
-        console.log('spanish')
+      if (languages[i].value === 'english') {
+        return 'english';
+      } else if (languages[i].value === 'french') {
+        return 'french';
+      } else if (languages[i].value === 'spanish') {
+        return 'spanish';
+      } else {
+        console.log('error in pickLanguage');
+      }
     };
   };
 
@@ -152,11 +163,27 @@ function setAlert (text) {
 function generateWord (settings) {
   var language = settings[0];
   var difficulty = settings[1];
+
   var dictionary = [];
 
-  if (language === 'en') {
+  var settings = settings;
+
+  console.log('in generateWord: ' + language + difficulty + settings);
+
+  if (language === 'english') {
+    return randomizeWord(words[difficulty]);
+  } else if (language === 'spanish') {
+    return randomizeWord(palabras[difficulty]);
+  } else if (language === 'french') {
+    return randomizeWord(mots[difficulty]);
+  } else {
+    console.log('error generating word from language');
   }
 };
+
+function randomizeWord (array) {
+  return array[randomIndexFromLength(array.length)];
+}
 
 function shuffleLetters () {
   var oldLetterOrder = getLettersFromDOM();
@@ -253,6 +280,27 @@ function fadeLettersIn () {
       console.log(document.getElementById(i).className);
     }, 250);
   }
+}
+
+
+// 6. Dictionaries
+
+const words = {
+  'easy': ['bear', 'ball', 'fart', 'butt', 'toot'],
+  'medium': ['hello', 'world', 'tooth', 'erase', 'biker'],
+  'hard': ['pursue', 'window', 'potato', 'pepper', 'fallen']
+}
+
+const mots = {
+  'easy': ['fear', 'fall', 'fart', 'futt', 'foot'],
+  'medium': ['fello', 'forld', 'footh', 'frase', 'fiker'],
+  'hard': ['fursue', 'findow', 'fotato', 'fepper', 'fallen']
+}
+
+const palabras = {
+  'easy': ['sear', 'sall', 'sart', 'sutt', 'soot'],
+  'medium': ['sello', 'sorld', 'sooth', 'srase', 'siker'],
+  'hard': ['sursue', 'sindow', 'sotato', 'sepper', 'sallen']
 }
 
 runGame();
