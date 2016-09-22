@@ -26,7 +26,7 @@
         <span class="letter" id="3">D</span>
       </p>
 
-      <form>
+      <form onkeypress="return event.keyCode != 13;">
         <p id="active-game-buttons">
           <button type="button" id="shuffle" onclick="shuffleLetters();"><img src="./refresh-icon.png" height="24px"></button>
           <button type="button" id="new-word">New Word</button>
