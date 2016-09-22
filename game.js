@@ -103,7 +103,7 @@ function getLettersFromDOM () {
   var letters = Array.from(document.getElementsByClassName('letter'));
   
   for (var i = 0; i < letters.length; i++) {
-    letters[i] = letters[i].innerHTML.toLowerCase();
+    letters[i] = letters[i].innerHTML.toUpperCase();
   }
 
   return letters;
@@ -197,7 +197,7 @@ function enableGuessing () {
 }
 
 function getGuess () {
-  var currentGuess = document.getElementById('guess').value.toLowerCase().split('');
+  var currentGuess = document.getElementById('guess').value.toUpperCase().split('');
   console.log(compareGuess(currentGuess, ['w', 'o', 'r', 'd']));
 }
 
