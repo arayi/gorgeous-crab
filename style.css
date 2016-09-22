@@ -18,3 +18,17 @@ h2 {
   padding-top: 0px;
   margin-top: 0px;
 }
+
+.hidden {
+  color: rgba(0,0,0, 0.0);
+}
+
+@keyframes pulse-once {
+  0% { color: rgba(255,0,0, 1.0); }
+  100% { color: rgba(0,0,0, 0.0); }
+}
+
+.pulse-once {
+  animation-name: pulse-once;
+  animation-duration: 1.5s;
+}

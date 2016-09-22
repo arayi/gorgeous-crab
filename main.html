@@ -17,6 +17,7 @@
     </dialog>
 
     <div id="game">
+      <p id="correctness" class="hidden"></p>
       <p id="word">
         <span class="letter" id="0">W</span>
         <span class="letter" id="1">O</span>
@@ -31,8 +32,8 @@
         </p>
 
         <p>
-          <input type="text" autocapitalize="none" autocomplete="off" autocorrect="off">
-          <button type="button" id="submit-guess">Guess</button>
+          <input type="text" autocapitalize="none" autocomplete="off" autocorrect="off" id="guess">
+          <button type="button" id="submit-guess" onclick="getGuess();">Guess</button>
         </p>
 
         <p id="new-game-buttons">

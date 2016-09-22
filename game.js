@@ -10,12 +10,13 @@ function runGame () {
   saveSettings('localSettings', settings)
   saveSettings('currentGameScore', score)
 
-  while (getScore() < 3) {
-    saveSettings('currentGameScore', score++)
-    console.log(getScore());
-  };
+  var mainGameInterval = setInterval(function() {
+    if (checkForWin() === true) {
+      clearInterval(mainGameInterval);
+      winGame();
+    }
+  }, 1000);
 
-  winGame();
 };
 
 function saveSettings (name, settings) {
@@ -40,7 +41,13 @@ function getSettings (name) {
 };
 
 function getScore () {
-  return getSettings('currentGameScore');
+  return parseInt(getSettings('currentGameScore'));
+}
+
+function incrementScore () {
+  var newScore = getScore();
+  newScore++;
+  saveSettings('currentGameScore', newScore);
 }
 
 function pickLanguage() {
@@ -62,13 +69,12 @@ function pickLanguage() {
 
 function pickDifficulty() {
   var difficulties = document.getElementsByName('difficulty');
+  
   for (var i = 0; i < difficulties.length; i++) {
     if (difficulties[i].checked) {
       return difficulties[i].value;
     };
   };
-
-
 };
 
 function generateWord (settings) {
@@ -97,7 +103,7 @@ function getLettersFromDOM () {
   var letters = Array.from(document.getElementsByClassName('letter'));
   
   for (var i = 0; i < letters.length; i++) {
-    letters[i] = letters[i].innerHTML;
+    letters[i] = letters[i].innerHTML.toLowerCase();
   }
 
   return letters;
@@ -136,9 +142,73 @@ function writeLettersToDOM (newOrder) {
 
 }
 
-function isCorrect (answer, word) {
- return answer.toLowercase() === word.toLowercase();
-};
+function compareGuess (guess, answer) {
+  var currentGuess = guess.join('');
+  var currentAnswer = answer.join('');
+
+  console.log(currentGuess === currentAnswer);
+  console.log(currentGuess == currentAnswer);
+  console.log(document.getElementById('correctness'));
+
+  if (currentGuess.length !== currentAnswer.length | currentGuess.sort !== currentAnswer.sort) {
+    setAlert('Wrong letters!');
+    pulseAlert();
+  }
+
+  if (currentGuess.sort === currentAnswer.sort) {
+    setAlert('Incorrect!');
+    pulseAlert();
+  }
+
+  if (currentGuess === currentAnswer) {
+    incrementScore();
+    console.log(getScore());
+    setAlert('Correct!');
+    pulseAlert();
+  }
+
+  return currentGuess == currentAnswer;
+}
+
+function setAlert (text) {
+  if (typeof(text) === 'string') {
+    document.getElementById('correctness').innerHTML = text;
+  } else {
+    console.log('error setting alert');
+  }
+}
+
+function pulseAlert () {
+  document.getElementById('correctness').classList.remove("hidden");
+  document.getElementById('correctness').classList.add("pulse-once");
+
+  setTimeout(function() {
+    document.getElementById('correctness').classList.remove("pulse-once");
+    document.getElementById('correctness').classList.add("hidden");
+  }, 1500);
+}
+
+function disableGuessing () {
+
+}
+
+function enableGuessing () {
+
+}
+
+function getGuess () {
+  var currentGuess = document.getElementById('guess').value.toLowerCase().split('');
+  console.log(compareGuess(currentGuess, ['w', 'o', 'r', 'd']));
+}
+
+function checkForWin () {
+  if (getScore() === 3) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 
 function winGame () {
   var modal = document.getElementById('win-modal');
