@@ -1,14 +1,14 @@
 <html>
 
   <head>
-    <link href="https://fonts.googleapis.com/css?family=Raleway|Source+Code+Pro:900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Source+Code+Pro:400,900" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Scram!</title>
   </head>
 
   <body>
     <header>
-      <h1>Scram!</h1><br><div id="description"><h2>Unscramble <span id="count">three</span> words to win &hearts;</h2></div>
+      <h1>Scram!</h1><br><div id="description"><h2>Unscramble <span id="count">three words</span> to win &hearts;</h2></div>
     </header>
 
     <dialog id="win-modal">
@@ -28,8 +28,8 @@
 
       <form onkeypress="return event.keyCode != 13;">
         <p id="active-game-buttons">
-          <button type="button" id="shuffle" onclick="shuffleLetters();"><img src="./refresh-icon.png" height="24px"></button>
-          <button type="button" id="new-word">New Word</button>
+          <button type="button" id="shuffle" onclick="shuffleLetters();"><img src="./refresh-icon.png" height="30px"> Shuffle</button>
+          <button type="button" id="new-word" onclick="getNewWord();">New Word</button>
         </p>
 
         <p>

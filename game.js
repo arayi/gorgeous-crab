@@ -12,19 +12,17 @@
 function runGame () {
   var settings = [pickLanguage(), pickDifficulty()];
   var score = 0;
-
   var currentWord = generateWord(settings).toUpperCase().split('');
-  writeLettersToDOM(currentWord);
-  shuffleLetters();
-
-  console.log("currentWord is: " + currentWord);
 
   localStorage.clear();
+  
+  writeLettersToDOM(currentWord);
+  shuffleLetters();
+  resetHeader();
 
-  saveSettings('localSettings', settings)
-  saveSettings('currentGameScore', score)
-
-  console.log(settings + "are the settings for this game");
+  saveSettings('currentWord', currentWord);
+  saveSettings('localSettings', settings);
+  saveSettings('currentGameScore', score);
 
   var mainGameInterval = setInterval(function() {
     if (checkForWin() === true) {
@@ -36,7 +34,7 @@ function runGame () {
 };
 
 function checkForWin () {
-  if (getScore() === 3) {
+  if (getScore() >= 3) {
     return true;
   } else {
     return false;
@@ -72,9 +70,11 @@ function saveSettings (name, settings) {
 
 function getSettings (name) {
   if (name === 'localSettings') {
-    return String.split(',')
+    return localStorage.getItem(name).split(',')
   } else if (name === 'currentGameScore') {
     return (parseInt(localStorage.getItem(name)));
+  } else if (name === 'currentWord') {
+    return localStorage.getItem(name);
   } else {
     console.log('error getting setting: ' + name);
   };
@@ -134,20 +134,32 @@ function getLettersFromDOM () {
 function writeLettersToDOM (newOrder) {
   var domNode = document.getElementById('word');
 
+  var classes = [];
+
   while (domNode.firstChild) {
+    classes.push(domNode.firstChild.classList);
     domNode.removeChild(domNode.firstChild);
   };
 
   for (i = 0; i < newOrder.length; i++) {
-    domNode.innerHTML += '<span class=\"letter\" id=\"' + i + '\">' + newOrder[i] + '</span>\n        '
+    domNode.innerHTML += '<span class=\"letter bounce-letters\" id=\"' + i + '\">' + newOrder[i] + '</span>\n        '
   }
 
 }
 
 function getGuess () {
   var currentGuess = document.getElementById('guess').value.toUpperCase().split('');
-  console.log(currentGuess);
-  console.log(compareGuess(currentGuess, ['W', 'O', 'R', 'D']));
+  if (compareGuess(currentGuess, getSettings('currentWord').split(',') )) {
+    getNewWord();
+  };
+  switchFocusBackToTextBox();
+  setTimeout(function () { document.getElementById('guess').focus(); }, 100);
+}
+
+function switchFocusBackToTextBox () {
+  var textBox = document.getElementById('guess');
+  textBox.value = '';
+  textBox.focus();
 }
 
 function setAlert (text) {
@@ -156,6 +168,35 @@ function setAlert (text) {
   } else {
     console.log('error setting alert');
   }
+}
+
+function getNewWord () {
+  var settings = getSettings('localSettings');
+  
+  var currentWord = generateWord(settings).toUpperCase().split('');
+
+  saveSettings('currentWord', currentWord)
+  
+  writeLettersToDOM(currentWord);
+  shuffleLetters();
+}
+
+function decrementHeader () {
+  var numberNode = document.getElementById('count');
+  if (numberNode.innerHTML === 'three words') {
+    numberNode.innerHTML = 'two words';
+  } else if (numberNode.innerHTML === 'two words') {
+    numberNode.innerHTML = 'one word';
+  } else if (numberNode.innerHTML === 'one word') {
+    numberNode.innerHTML = 'zero words';
+  } else {
+    console.log('error decrementing header');
+  }
+}
+
+function resetHeader () {
+  var numberNode = document.getElementById('count');
+  numberNode.innerHTML = 'three words';
 }
 
 
@@ -168,8 +209,6 @@ function generateWord (settings) {
   var dictionary = [];
 
   var settings = settings;
-
-  console.log('in generateWord: ' + language + difficulty + settings);
 
   if (language === 'english') {
     return randomizeWord(words[difficulty]);
@@ -191,7 +230,6 @@ function shuffleLetters () {
   var consumableOrder = getLettersFromDOM();
   var newLetterOrder = changeLetterOrder(consumableOrder);
 
-  fadeLettersOut();
 
   while (newLetterOrder == oldLetterOrder) {
     consumableOrder = getLettersFromDOM();
@@ -199,7 +237,7 @@ function shuffleLetters () {
   }
 
   writeLettersToDOM(newLetterOrder);
-  fadeLettersIn();
+  bounceLetters();
 };
 
 function changeLetterOrder(letterArray) {
@@ -226,10 +264,6 @@ function compareGuess (guess, answer) {
   var currentGuess = guess.join('');
   var currentAnswer = answer.join('');
 
-  console.log(currentGuess === currentAnswer);
-  console.log(currentGuess == currentAnswer);
-  console.log(document.getElementById('correctness'));
-
   if (currentGuess.length !== currentAnswer.length | currentGuess.sort !== currentAnswer.sort) {
     setAlert('Wrong letters!');
     pulseAlert();
@@ -242,6 +276,7 @@ function compareGuess (guess, answer) {
 
   if (currentGuess === currentAnswer) {
     incrementScore();
+    decrementHeader();
     console.log(getScore());
     setAlert('Correct!');
     pulseAlert();
@@ -263,24 +298,19 @@ function pulseAlert () {
   }, 1500);
 }
 
-function fadeLettersOut () {
-  var letters = document.getElementsByClassName('letter');
-  console.log(letters);
+function bounceLetters () {
+  var letters = document.getElementById('word').children;
+
   for (var i = 0; i < letters.length; i++) {
-    letters[i].classList.remove("word-fade-in");
-    letters[i].classList.add("word-fade-out");
-    console.log(letters[i].className);
+    var currentLetter = document.getElementById(i);
+    setTimeout(function () { bounceOneLetter(currentLetter) }, 50); 
   }
 }
 
-function fadeLettersIn () {
-  for (var i = 0; i < getLettersFromDOM.length; i++) {
-    setTimeout(function () {
-      document.getElementById(i).classList.remove("word-fade-out");
-      document.getElementById(i).classList.add("word-fade-in");
-      console.log(document.getElementById(i).className);
-    }, 250);
-  }
+function bounceOneLetter (letter) {
+  var letter = letter;
+  letter.classList.add("bounce-letters");
+  console.log(letter.classList);
 }
 
 
