@@ -18,13 +18,13 @@
     </dialog>
 
     <div id="game">
-      <p id="correctness" class="hidden"></p>
-      <p id="word">
+      <div id="correctness" class="hidden"></div>
+      <div id="word">
         <span class="letter" id="0">W</span>
         <span class="letter" id="1">O</span>
         <span class="letter" id="2">R</span>
         <span class="letter" id="3">D</span>
-      </p>
+      </div>
 
       <form onkeypress="return event.keyCode != 13;">
         <p id="active-game-buttons">
@@ -55,7 +55,8 @@
 
     </div>
 
-    <footer>
+    <footer id="footer">
+      Made with love at Learners Guild by <a href="http://www.github.com/arayi">Melody</a>, <a href="http://www.github.com/rachel-ftw">Rachel</a>, and <a href="http://www.github.com/jamestewartjr">James</a>. Check out <a href="http://www.github.com/arayi/gorgeous-crab/">our project</a> on GitHub!
       <script type="text/javascript" src="game.js"></script>
     </footer>
   </body>

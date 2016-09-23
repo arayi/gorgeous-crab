@@ -7,21 +7,24 @@ body {
 }
 
 h1 {
-  font-size: 8em;
+  font-size: 7em;
   padding-bottom: 0px;
   margin-bottom: 0px;
   font-weight: 900;
 }
 
 h2 {
+  position: relative;
+  bottom: 40px;
   padding-top: 0px;
   margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .letter {
   color: rgb(51,0,0);
   font-family: 'Source Code Pro', monospace;
-  font-size: 6em;
+  font-size: 3.5em;
   font-weight: 900;
   border: 3px solid rgb(102,0,17);
   border-bottom: 3px solid rgb(131,74,33);
@@ -91,4 +94,27 @@ input[type=text] {
 
 #win-modal {
   z-index: 99;
+}
+
+#count {
+  color: #900;
+}
+
+#correctness {
+  position: relative;
+  bottom: 20px;
+  margin-bottom: 0px;
+}
+
+footer {
+  color: rgb(69,154,205);
+  font-size: .6em;
+  width: 100%;
+  position: absolute;
+  bottom: 10px;
+}
+
+#footer a {
+  color: rgb(39, 124, 175);
+  text-decoration: none;
 }
