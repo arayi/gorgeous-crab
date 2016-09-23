@@ -16,18 +16,18 @@ Make sure to look at templates if you need to, but you should create the code fr
 
 ## Specifications
 
-- [ ] User can play the game in a browser, regardless of platform/resolution.
-- [ ] User can pick a language when starting the game.
-- [ ] User can pick a difficulty level from easy (4 letters only) to hard (any 4+ length word).
-- [ ] User must unscramble three words, one at a time, to win.
-- [ ] User can click a button to "throw away" a word and get a new one unlimited times.
-- [ ] User can re-scramble the words unlimited times.
-- [ ] Re-scramble will be animated with CSS.
-- [ ] User is prompted for an answer.
-- [ ] User can attempt a word unlimited times.
-- [ ] User is notified of whether their current guess is correct.
-- [ ] User receives a dismissable modal notifying when they win the game.
-- [ ] User is delighted by pleasant CSS interface.
+- [x] User can play the game in a browser, regardless of platform/resolution.
+- [x] User can pick a language when starting the game.
+- [x] User can pick a difficulty level from easy (4 letters only) to hard (any 4+ length word).
+- [x] User must unscramble three words, one at a time, to win.
+- [x] User can click a button to "throw away" a word and get a new one unlimited times.
+- [x] User can re-scramble the words unlimited times.
+- [x] Re-scramble will be animated with CSS.
+- [x] User is prompted for an answer.
+- [x] User can attempt a word unlimited times.
+- [x] User is notified of whether their current guess is correct.
+- [x] User receives a dismissable modal notifying when they win the game.
+- [x] User is delighted by pleasant CSS interface.
 
 ### Required
 
