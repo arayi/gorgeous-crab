@@ -1,14 +1,14 @@
 <html>
 
   <head>
-    <link href="https://fonts.googleapis.com/css?family=Raleway|Source+Code+Pro:900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Source+Code+Pro:400,900" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Scram!</title>
   </head>
 
   <body>
     <header>
-      <h1>Scram!</h1><br><div id="description"><h2>Unscramble <span id="count">three</span> words to win &hearts;</h2></div>
+      <h1>Scram!</h1><br><div id="description"><h2>Unscramble <span id="count">three words</span> to win &hearts;</h2></div>
     </header>
 
     <dialog id="win-modal">
@@ -18,18 +18,18 @@
     </dialog>
 
     <div id="game">
-      <p id="correctness" class="hidden"></p>
-      <p id="word">
+      <div id="correctness" class="hidden"></div>
+      <div id="word">
         <span class="letter" id="0">W</span>
         <span class="letter" id="1">O</span>
         <span class="letter" id="2">R</span>
         <span class="letter" id="3">D</span>
-      </p>
+      </div>
 
       <form onkeypress="return event.keyCode != 13;">
         <p id="active-game-buttons">
-          <button type="button" id="shuffle" onclick="shuffleLetters();"><img src="./refresh-icon.png" height="24px"></button>
-          <button type="button" id="new-word">New Word</button>
+          <button type="button" id="shuffle" onclick="shuffleLetters();"><img src="./refresh-icon.png" height="30px"> Shuffle</button>
+          <button type="button" id="new-word" onclick="getNewWord();">New Word</button>
         </p>
 
         <p>
@@ -55,7 +55,8 @@
 
     </div>
 
-    <footer>
+    <footer id="footer">
+      Made with love at Learners Guild by <a href="http://www.github.com/arayi">Melody</a>, <a href="http://www.github.com/rachel-ftw">Rachel</a>, and <a href="http://www.github.com/jamestewartjr">James</a>. Check out <a href="http://www.github.com/arayi/gorgeous-crab/">our project</a> on GitHub!
       <script type="text/javascript" src="game.js"></script>
     </footer>
   </body>
